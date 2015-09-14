@@ -5,14 +5,14 @@ channel. Improvements are welcome! Just send a pull request.
 
 ## Screenshot
 
-![screenshot](https://raw.github.com/sciyoshi/redmine-slack/gh-pages/screenshot.png)
+![screenshot](https://raw.github.com/totuworld/redmine-slack/gh-pages/screenshot.png)
 
 ## Installation
 
 From your Redmine plugins directory, clone this repository as `redmine_slack` (note
 the underscore!):
 
-    git clone https://github.com/sciyoshi/redmine-slack.git redmine_slack
+    git clone https://github.com/totuworld/redmine-slack.git redmine_slack
 
 You will also need the `httpclient` dependency, which can be installed by running
 
@@ -33,3 +33,8 @@ project will be checked (or the default will be used). To prevent all notificati
 from being sent for a project, set the custom channel to `-`.
 
 For more information, see http://www.redmine.org/projects/redmine/wiki/Plugins.
+
+## Direct Message
+
+If you want Direct Message to `Issue Watcher's`, then create a user custom field(Administration > Custom fields > User) named `SlackID`.
+`SlackID` is find in [user object](https://api.slack.com/types/user) `id` field on [users.info](https://api.slack.com/methods/users.info) or [users.list](https://api.slack.com/methods/users.list) Slack API.
