@@ -6,7 +6,7 @@ Redmine::Plugin.register :redmine_slack do
 	name 'Redmine Slack'
 	author 'Yochang Song'
 	url 'https://github.com/totuworld/redmine-slack'
-	author_url 'http://www.sciyoshi.com'
+	author_url 'http://totuworld.github.io'
 	description 'Slack chat integration'
 	version '0.2'
 
@@ -16,7 +16,7 @@ Redmine::Plugin.register :redmine_slack do
 		:default => {
 			'callback_url' => 'http://slack.com/callback/',
 			'channel' => nil,
-			'icon' => 'https://raw.github.com/sciyoshi/redmine-slack/gh-pages/icon.png',
+			'icon' => 'https://raw.github.com/totuworld/redmine-slack/gh-pages/icon.png',
 			'username' => 'redmine',
 			'display_watchers' => 'no',
 			'send_private' => 'no'
