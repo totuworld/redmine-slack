@@ -4,13 +4,13 @@ require_dependency 'redmine_slack/listener'
 
 Redmine::Plugin.register :redmine_slack do
 	name 'Redmine Slack'
-	author 'Samuel Cormier-Iijima'
-	url 'https://github.com/sciyoshi/redmine-slack'
+	author 'Yochang Song'
+	url 'https://github.com/totuworld/redmine-slack'
 	author_url 'http://www.sciyoshi.com'
 	description 'Slack chat integration'
-	version '0.1'
+	version '0.2'
 
-	requires_redmine :version_or_higher => '0.8.0'
+	requires_redmine :version_or_higher => '2.1'
 
 	settings \
 		:default => {

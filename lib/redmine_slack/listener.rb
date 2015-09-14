@@ -1,6 +1,6 @@
 require 'httpclient'
 
-class SlackListener < Redmine::Hook::Listener
+class SlackListener < Redmine::Hook::ViewListener
 	def controller_issues_new_after_save(context={})
 		issue = context[:issue]
 
