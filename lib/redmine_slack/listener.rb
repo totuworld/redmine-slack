@@ -25,12 +25,8 @@ class SlackListener < Redmine::Hook::Listener
 			:title => I18n.t("field_assigned_to"),
 			:value => escape(issue.assigned_to.to_s),
 			:short => true
-		}, {
-			:title => I18n.t("field_summary"),
-			:value => escape(issue),
-			:short => true
 		}]
-
+		
 		attachment[:fields] << {
 			:title => I18n.t("field_watcher"),
 			:value => escape(issue.watcher_users.join(', ')),
@@ -38,6 +34,13 @@ class SlackListener < Redmine::Hook::Listener
 		} if Setting.plugin_redmine_slack[:display_watchers] == 'yes'
 
 		speak msg, channel, attachment, url
+		
+		if Setting.plugin_redmine_slack[:send_private]
+			issue.watcher_users.collect do |user|
+				fieldLoad = load_slackID(user)
+				speak msg, fieldLoad, attachment, url
+			end
+		end
 	end
 
 	def controller_issues_edit_after_save(context={})
@@ -56,6 +59,13 @@ class SlackListener < Redmine::Hook::Listener
 		attachment[:fields] = journal.details.map { |d| detail_to_field d }
 
 		speak msg, channel, attachment, url
+		
+		if Setting.plugin_redmine_slack[:send_private]
+			issue.watcher_users.collect do |user|
+				fieldLoad = load_slackID(user)
+				speak msg, fieldLoad, attachment, url
+			end
+		end
 	end
 
 	def model_changeset_scan_commit_for_issue_ids_pre_issue_update(context={})
@@ -87,6 +97,13 @@ class SlackListener < Redmine::Hook::Listener
 		attachment[:fields] = journal.details.map { |d| detail_to_field d }
 
 		speak msg, channel, attachment, url
+		
+		if Setting.plugin_redmine_slack[:send_private]
+			issue.watcher_users.collect do |user|
+				fieldLoad = load_slackID(user)
+				speak msg, fieldLoad, attachment, url
+			end
+		end
 	end
 
 	def speak(msg, channel, attachment=nil, url=nil)
@@ -121,6 +138,13 @@ class SlackListener < Redmine::Hook::Listener
 private
 	def escape(msg)
 		msg.to_s.gsub("&", "&amp;").gsub("<", "&lt;").gsub(">", "&gt;")
+	end
+	
+	def load_slackID(user)
+		testUser = User.find(user.id)
+		yocf = UserCustomField.find_by_name("SlackID")
+		fieldLoad = testUser.custom_value_for(yocf).value
+		return fieldLoad
 	end
 
 	def object_url(obj)

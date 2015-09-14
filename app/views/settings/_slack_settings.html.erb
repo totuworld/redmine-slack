@@ -32,6 +32,20 @@
 </p>
 
 <p>
+	<label for="settings_send_watcher">Send private msg to Watchers?</label>
+	<select id="settings_send_watcher" value="<%= settings['send_private'] %>" name="settings[send_private]">
+		<option value="yes">Yes</option>
+		<option value="no" <%= settings['send_private'] != 'yes' ? %q(selected="selected") : '' %>>No</option>
+	</select>
+</p>
+
+<p>
+	If you select yes in private msg, 
+	<a href="/custom_fields/new?type=UserCustomField">User custom field</a> named "SlackID".
+	SlackID get in <a href="https://api.slack.com/methods/users.list">Slack users.list API</a> member's object node name "id".
+</p>
+
+<p>
 	<label for="settings_post_updates">Post Issue Updates?</label>
 	<input type="checkbox" id="settings_post_updates" value="1" name="settings[post_updates]" <%= settings['post_updates'] == '1' ? 'checked="checked"' : '' %> />
 </p>
