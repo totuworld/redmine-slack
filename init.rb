@@ -18,7 +18,8 @@ Redmine::Plugin.register :redmine_slack do
 			'channel' => nil,
 			'icon' => 'https://raw.github.com/sciyoshi/redmine-slack/gh-pages/icon.png',
 			'username' => 'redmine',
-			'display_watchers' => 'no'
+			'display_watchers' => 'no',
+			'send_private' => 'no'
 		},
 		:partial => 'settings/slack_settings'
 end
