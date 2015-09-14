@@ -1,6 +1,6 @@
 require 'httpclient'
 
-class SlackListener < Redmine::Hook::ViewListener
+class SlackListener < Redmine::Hook::Listener
 	def controller_issues_new_after_save(context={})
 		issue = context[:issue]
 
@@ -24,6 +24,10 @@ class SlackListener < Redmine::Hook::ViewListener
 		}, {
 			:title => I18n.t("field_assigned_to"),
 			:value => escape(issue.assigned_to.to_s),
+			:short => true
+		}, {
+			:title => I18n.t("field_summary"),
+			:value => escape(issue),
 			:short => true
 		}]
 
